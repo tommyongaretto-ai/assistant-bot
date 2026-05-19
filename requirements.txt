@@ -1,0 +1,16 @@
+# === BOT TELEGRAM ===
+python-telegram-bot[job-queue]==21.6
+
+# === AI / LLM ===
+anthropic==0.40.0
+openai==1.58.1          # usato per Whisper (trascrizione vocali)
+
+# === SCHEDULER ===
+apscheduler==3.10.4
+
+# === HTTP ===
+requests==2.32.3
+aiohttp==3.11.10
+
+# === VARIABILI D'AMBIENTE ===
+python-dotenv==1.0.1
