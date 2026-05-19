@@ -56,7 +56,7 @@ data = {{
 }}
 
 ── Intent: spesa ──
-data = { "amount": numero in euro, "category": "cibo|trasporti|shopping|svago|generale", "description": "descrizione breve" }
+data = { "amount": numero in euro, "category": "cibo|trasporti|shopping|svago|dipendenze|beni primari|lavoro|altro", "description": "descrizione breve" }
 ── Intent: checkin_response ──
 data = {{
   "sentiment": "positivo | neutro | negativo",
