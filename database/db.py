@@ -94,7 +94,17 @@ def init_db():
             is_active    INTEGER DEFAULT 1
         )
     """)
-
+    # ── 6. TRACKER SPESE ─────────────────────────────────────────────────────
+    c.execute("""
+        CREATE TABLE IF NOT EXISTS expenses (
+            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            date        TEXT    NOT NULL,
+            description TEXT    NOT NULL,
+            amount      REAL    NOT NULL,
+            category    TEXT    DEFAULT 'generale',
+            created_at  TEXT    DEFAULT (datetime('now'))
+        )
+    """)
     conn.commit()
     conn.close()
     print("✅ Database inizializzato correttamente →", DB_PATH)

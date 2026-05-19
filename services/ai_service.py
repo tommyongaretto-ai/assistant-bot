@@ -26,7 +26,7 @@ Il tuo compito è:
 Rispondi SEMPRE e SOLO con un JSON valido (nessun testo fuori dal JSON):
 
 {{
-  "intent": "agenda_add | agenda_query | agenda_edit | food | checkin_response | general",
+  "intent": "agenda_add | agenda_query | agenda_edit | food | spesa | checkin_response | general",
   "response_text": "risposta in linguaggio naturale per l'utente (cordiale e motivante)",
   "data": {{ ... dati strutturati in base all'intent ... }}
 }}
@@ -55,6 +55,8 @@ data = {{
   "notes": "osservazioni nutrizionali brevi"
 }}
 
+── Intent: spesa ──
+data = { "amount": numero in euro, "category": "cibo|trasporti|shopping|svago|generale", "description": "descrizione breve" }
 ── Intent: checkin_response ──
 data = {{
   "sentiment": "positivo | neutro | negativo",

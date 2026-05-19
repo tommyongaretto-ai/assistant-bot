@@ -155,3 +155,24 @@ def save_weekly_report(week_start: str, week_end: str, report_text: str,
           json.dumps(food_summary)))
     conn.commit()
     conn.close()
+def add_expense(description, amount, category="generale"):
+    conn = get_connection()
+    c = conn.cursor()
+    today = datetime.now().strftime("%Y-%m-%d")
+    c.execute("""
+        INSERT INTO expenses (date, description, amount, category)
+        VALUES (?, ?, ?, ?)
+    """, (today, description, amount, category))
+    conn.commit()
+    conn.close()
+
+def get_expenses_for_month(month):
+    conn = get_connection()
+    c = conn.cursor()
+    c.execute("""
+        SELECT * FROM expenses WHERE date LIKE ? ORDER BY date
+    """, (f"{month}%",))
+    rows = [dict(r) for r in c.fetchall()]
+    conn.close()
+    return rows
+    
