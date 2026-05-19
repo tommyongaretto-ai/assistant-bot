@@ -43,19 +43,18 @@ async def message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     elif intent == "agenda_query":
         await _handle_agenda_query(update, data, response_text)
-
     elif intent == "spesa":
         models.add_expense(
             description=user_text,
             amount=data.get("amount", 0),
             category=data.get("category", "generale")
         )
-      totale = sum(e["amount"] for e in models.get_expenses_for_month(
+        totale = sum(e["amount"] for e in models.get_expenses_for_month(
             datetime.now().strftime("%Y-%m")))
         await update.message.reply_text(
             f"💰 {response_text}\n\n📊 Totale speso questo mese: *{totale:.2f}€*",
             parse_mode="Markdown"
-        )  
+        )
     elif intent == "food":
         await _handle_food(update, data, response_text, user_text)
 
