@@ -54,9 +54,9 @@ data = {{
   "calories_est": numero stimato,
   "notes": "osservazioni nutrizionali brevi"
 }}
-
 ── Intent: spesa ──
-data = { "amount": numero in euro, "category": "cibo o trasporti o shopping o svago o dipendenze o beni primari o lavoro o altro", "description": "descrizione breve" }
+data ha questi campi: amount (numero), category (cibo, trasporti, shopping, svago, dipendenze, beni_primari, lavoro, altro), description (testo breve)
+
 ── Intent: checkin_response ──
 data = {{
   "sentiment": "positivo | neutro | negativo",
