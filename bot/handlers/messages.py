@@ -49,6 +49,39 @@ async def message_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
             amount=data.get("amount", 0),
             category=data.get("category", "generale")
         )
+    elif intent == "spesa_multipla":
+        totale_aggiunto = 0
+        for s in data.get("spese", []):
+            models.add_expense(
+                description=s.get("description", ""),
+                amount=s.get("amount", 0),
+                category=s.get("category", "altro")
+            )
+            totale_aggiunto += s.get("amount", 0)
+        totale = sum(e["amount"] for e in models.get_expenses_for_month(
+            datetime.now().strftime("%Y-%m")))
+        await update.message.reply_text(
+            f"💰 Ho registrato {len(data.get('spese', []))} spese per un totale di {totale_aggiunto:.2f}€\n\n"
+            f"📊 Totale speso questo mese: *{totale:.2f}€*",
+            parse_mode="Markdown"
+        )
+
+    elif intent == "spesa_query":
+        from datetime import datetime as dt
+        mese = dt.now().strftime("%Y-%m")
+        spese = models.get_expenses_for_month(mese)
+        totale = sum(e["amount"] for e in spese)
+        categorie = {}
+        for s in spese:
+            cat = s["category"]
+            categorie[cat] = categorie.get(cat, 0) + s["amount"]
+        riepilogo = "\n".join([f"• {k}: {v:.2f}€" for k, v in categorie.items()])
+        await update.message.reply_text(
+            f"📊 *Spese di {dt.now().strftime('%B %Y')}*\n\n"
+            f"💰 Totale: *{totale:.2f}€*\n\n"
+            f"*Per categoria:*\n{riepilogo}",
+            parse_mode="Markdown"
+        )
         totale = sum(e["amount"] for e in models.get_expenses_for_month(
             datetime.now().strftime("%Y-%m")))
         await update.message.reply_text(
